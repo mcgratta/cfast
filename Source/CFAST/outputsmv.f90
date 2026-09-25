@@ -60,10 +60,9 @@
     real(eb) :: targetvector(6)
     real(eb) :: xyz(6)
     integer ::i, iroom1, iroom2
-    character(len=128) :: dir
-    character(len=64) :: smokeviewplotfilename, drive, ext, name ! the extension is .plt
+    character(len=64) :: smokeviewplotfilename, ext, name ! the extension is .plt
     character(len=35) :: cTarg
-    integer(4) :: length, splitpathqq
+    integer(4) :: splitpathqq
     integer :: vtype
     integer :: csvf_output
 
@@ -78,7 +77,6 @@
 
     ! this code is to trim the file name to the name itself along with the extension
     ! for compatibility with version 4 and later of smokeview
-    length = splitpathqq(smvcsv, drive, dir, name, ext)
     smokeviewplotfilename = trim(name) // trim(ext)
 
     rewind (iofilsmv)
