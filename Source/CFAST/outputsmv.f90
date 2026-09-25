@@ -60,16 +60,13 @@
     real(eb) :: targetvector(6)
     real(eb) :: xyz(6)
     integer ::i, iroom1, iroom2
-    character(len=64) :: smokeviewplotfilename, ext, name ! the extension is .plt
+    character(len=256) :: smokeviewplotfilename ! the extension is .plt
     character(len=35) :: cTarg
-    integer(4) :: splitpathqq
     integer :: vtype
     integer :: csvf_output
 
-    external splitpathqq
-
     integer ibar, jbar, kbar
-    integer :: j
+    integer :: j, slash_pos
     type(room_type), pointer :: roomptr
     type(detector_type), pointer :: dtectptr
     type(slice_type), pointer :: sf
@@ -77,7 +74,8 @@
 
     ! this code is to trim the file name to the name itself along with the extension
     ! for compatibility with version 4 and later of smokeview
-    smokeviewplotfilename = trim(name) // trim(ext)
+    slash_pos = scan(trim(smvcsv), '/' // achar(92), back=.true.)
+    smokeviewplotfilename = smvcsv(slash_pos+1:len_trim(smvcsv))
 
     rewind (iofilsmv)
     write (iofilsmv,"(a)") "ZONE"

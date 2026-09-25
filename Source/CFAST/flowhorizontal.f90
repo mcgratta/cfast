@@ -522,6 +522,10 @@ module hflow_routines
             r1m8 = 8.0_eb*r1
             xmslab(i) = cvent*sqrt(r1m8)*area*(p2+p1rt*p2rt+p1)/(p2rt+p1rt)/3.0_eb
             qslab(i) = cp*xmslab(i)*tslab(i)
+            do iprod = 1, ns
+                pslab(i,iprod) = cslab(i,iprod)*xmslab(i)
+            end do
+
         end if
 
         ! construct cfast data structures ss, sa, as, aa
